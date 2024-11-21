@@ -1,3 +1,4 @@
 SHIFT-ALT-Nuoli: Monista rivi
 ALT-Z: Rivitys
 CTRL-': komentoida tai poista komenttia
+ALT+Nuoli: Siirrä rivi ylös/alaspäin
