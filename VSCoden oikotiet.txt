@@ -1,0 +1,3 @@
+SHIFT-ALT-Nuoli: Monista rivi
+ALT-Z: Rivitys
+CTRL-': komentoida tai poista komenttia
