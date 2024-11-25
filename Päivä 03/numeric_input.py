@@ -9,7 +9,7 @@ is_not_number = True
 while is_not_number:
     # Kysy
     vastaus = input('Ikä? ')
-    if not vastaus:
+    if not vastaus: # Vastaus on tyhjä (käyttäjä on vain painanut Enteria)
         continue
 
     is_not_number = False
@@ -23,5 +23,3 @@ while is_not_number:
             break
 
 ikä = int(vastaus)
-
-
