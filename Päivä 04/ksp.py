@@ -9,8 +9,24 @@ while True:
     # Saada käyttäjän valinta
     while True:
         player_option = input('Kivi, sakset vai paperi? ')
+
+        # if player_option == 'k':
+        #     player_option = 'kivi'
+        #     break
+        # if player_option == 's':
+        #     player_option = 'sakset'
+        #     break
+        # if player_option == 'p':
+        #     player_option = 'paperi'
+        #     break
+
+        for option in OPTIONS:
+            if player_option == option[0]:
+                player_option = option
+
         if player_option in OPTIONS:
             break
+
         if player_option in OPTIONS_QUIT:
             player_option = None
             break
