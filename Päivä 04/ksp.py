@@ -23,28 +23,38 @@ while True:
     print(f'Kone valitse "{computer_option}"')
 
     # Laskea voittaja niiden perustella
-    if computer_option == player_option:
+    player_index = OPTIONS.index(player_option)
+    computer_index = OPTIONS.index(computer_option)
+
+    if player_index == computer_index:
         print('Tasapeli!')
-    # elif player_option == 'kivi':
-    #     if computer_option == 'sakset':
-    #         print('Voitit!')
-    #     else:
-    #         print('Kone voitti!')
-    # elif player_option == 'sakset':
-    #     if computer_option == 'paperi':
-    #         print('Voitit!')
-    #     else:
-    #         print('Kone voitti!')
-    # else:
-    #     if computer_option == 'kivi':
-    #         print('Voitit!')
-    #     else:
-    #         print('Kone voitti!')
-    elif (player_option == 'kivi' and computer_option == 'sakset') \
-       or (player_option == 'sakset' and computer_option == 'paperi') \
-       or (player_option == 'paperi' and computer_option == 'kivi'):
+    elif computer_index == (player_index + 1) % 3:
         print('Voitit!')
     else:
         print('Kone voitti!')
+
+    # if computer_option == player_option:
+    #     print('Tasapeli!')
+    # # elif player_option == 'kivi':
+    # #     if computer_option == 'sakset':
+    # #         print('Voitit!')
+    # #     else:
+    # #         print('Kone voitti!')
+    # # elif player_option == 'sakset':
+    # #     if computer_option == 'paperi':
+    # #         print('Voitit!')
+    # #     else:
+    # #         print('Kone voitti!')
+    # # else:
+    # #     if computer_option == 'kivi':
+    # #         print('Voitit!')
+    # #     else:
+    # #         print('Kone voitti!')
+    # elif (player_option == 'kivi' and computer_option == 'sakset') \
+    #    or (player_option == 'sakset' and computer_option == 'paperi') \
+    #    or (player_option == 'paperi' and computer_option == 'kivi'):
+    #     print('Voitit!')
+    # else:
+    #     print('Kone voitti!')
 
 print('Kiitos pelaamisesta')
