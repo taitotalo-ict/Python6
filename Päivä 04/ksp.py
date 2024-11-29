@@ -1,4 +1,6 @@
-import random
+#import random
+#import random as rnd
+from random import choice
 
 
 OPTIONS = ('kivi', 'sakset', 'paperi')
@@ -35,7 +37,7 @@ while True:
         break
     
     # Saada koneen valinta
-    computer_option = random.choice(OPTIONS)
+    computer_option = choice(OPTIONS)
     print(f'Kone valitse "{computer_option}"')
 
     # Laskea voittaja niiden perustella
