@@ -73,12 +73,10 @@ input_str = '((((()(()(((((((()))(((()((((()())(())()(((()((((((()((()(()(((()((
 
 floor = 0
 position = None
+chars = {'(': +1, ')': -1 }
 for index, char in enumerate(input_str):
-    if char == '(':
-        floor += 1 # floor = floor + 1
-    else:
-        floor -= 1
-    
+    floor += chars[char]
+   
     if position is None and floor == -1:
         position = index + 1
 
