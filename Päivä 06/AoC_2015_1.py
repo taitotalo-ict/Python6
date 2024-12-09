@@ -32,9 +32,21 @@ print('Osa 1:', floor)
 
 # print('Osa 2:', position)
 
+# floor = 0
+# for position in range(1, len(input_str)+1):
+#     char = input_str[position-1]
+#     if char == '(':
+#         floor += 1 # floor = floor + 1
+#     else:
+#         floor -= 1
+
+#     if floor == -1:
+#         break
+
+# print('Osa 2:', position)
+
 floor = 0
-for position in range(1, len(input_str)+1):
-    char = input_str[position-1]
+for index, char in enumerate(input_str):
     if char == '(':
         floor += 1 # floor = floor + 1
     else:
@@ -43,4 +55,5 @@ for position in range(1, len(input_str)+1):
     if floor == -1:
         break
 
+position = index + 1
 print('Osa 2:', position)
