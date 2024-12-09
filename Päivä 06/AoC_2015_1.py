@@ -18,10 +18,23 @@ print('Osa 1:', floor)
 
 # Osa 2: Missä ohjeiden sijainnissa se päätyy kerrokseen -1?
 
+# floor = 0
+# position = 0
+# for char in input_str:
+#     position += 1
+#     if char == '(':
+#         floor += 1 # floor = floor + 1
+#     else:
+#         floor -= 1
+
+#     if floor == -1:
+#         break
+
+# print('Osa 2:', position)
+
 floor = 0
-position = 0
-for char in input_str:
-    position += 1
+for position in range(1, len(input_str)+1):
+    char = input_str[position-1]
     if char == '(':
         floor += 1 # floor = floor + 1
     else:
