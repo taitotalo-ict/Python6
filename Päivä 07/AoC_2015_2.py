@@ -1001,21 +1001,12 @@ input_lista:list[str] = [
     '14x12x8'
 ]
 
-data:list[tuple[int, int, int]] = []
-for line in input_lista:
-    numbers = line.split('x') # ['14', '12', '8']
-    data.append((int(numbers[0]), int(numbers[1]), int(numbers[2])))
-
 paper = 0
-for box in data:
-    l, w, h = box
-    paper += 2*l*w + 2*w*h + 2*h*l + min(l*w, w*h, h*l)
-
-print('Part 1:', paper)
-
 ribbon = 0
-for box in data:
-    l, w, h = box
+for line in input_lista:
+    l, w, h= map(int, line.split('x'))
+    paper += 2*l*w + 2*w*h + 2*h*l + min(l*w, w*h, h*l)
     ribbon += min(2*l+2*w, 2*w+2*h, 2*l+2*h) + (l*w*h)
 
+print('Part 1:', paper)
 print('Part 2:', ribbon)
