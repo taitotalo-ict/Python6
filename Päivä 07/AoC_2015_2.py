@@ -1004,7 +1004,7 @@ input_lista:list[str] = [
 paper = 0
 ribbon = 0
 for line in input_lista:
-    l, w, h= map(int, line.split('x'))
+    l, w, h = map(int, line.split('x'))
     paper += 2*l*w + 2*w*h + 2*h*l + min(l*w, w*h, h*l)
     ribbon += min(2*l+2*w, 2*w+2*h, 2*l+2*h) + (l*w*h)
 
