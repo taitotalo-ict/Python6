@@ -20,4 +20,39 @@ for character in content:
     if (x, y) not in houses:
         houses.append((x, y))
 
+house = [0, 0]
+houses = [house]
+for character in content:
+    if character == '^':
+        house[1] += 1
+    elif character == 'v':
+        house[1] += -1
+    elif character == '<':
+        house[0] += -1
+    elif character == '>':
+        house[0] += 1
+    if house not in houses:
+        houses.append(house)
+
+
+house = 0 + 0j  # kompleksiluku
+houses = [house]
+DIRECTIONS = {'^': 1j, 'v': -1j, '<': -1, '>': 1}
+for character in content:
+    house += DIRECTIONS[character]
+    # match character:
+    #     case '^':
+    #         house += 1j
+    #     case 'v':
+    #         house += -1j
+    #     case '<':
+    #         house += -1
+    #     case '>':
+    #         house += 1
+    if house not in houses:
+        houses.append(house)
+
+
+
+
 print(len(houses))
