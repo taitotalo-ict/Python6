@@ -31,3 +31,11 @@ column2.sort()
 # difference = sum(abs(column1[idx] - column2[idx]) for idx in range(len(column1)))
 
 print('Part 1:', sum(abs(pair[0] - pair[1]) for pair in zip(column1, column2)))
+
+# similarity = 0
+# for num in column1:
+#     similarity += num * column2.count(num)
+
+similarity = sum(num * column2.count(num) for num in column1)
+
+print('Part 2:', similarity)
