@@ -1,0 +1,26 @@
+### Merkit:
+
+- `^`: Line start
+- `$`: Line end
+- `.`: Any character except new line (`\n`)
+- `\w`: Word char
+- `\W`: Non-word char
+- `\s`: White space
+- `\S`: Not white space
+- `\d`: Digit
+- `\D`: Not digit
+- `*`: Previous character/expression occurs 0 or more times
+- `+`: Previous character/expression occurs 1 or more times
+- `?`: Previous character/expression occurs 0 or 1 time
+- `{n}`: Previous character/expression occurs exactly `n` times
+- `{n,}`: Previous character/expression occurs `n` or more times
+- `{n,m}`: Previous character/expression occurs between 0 or more times`n` and `m` times
+- `[abc]`: Range. `a` or `b` or `c`
+- `[^abc]`: Range. Not `a` nor `b` nor `c`
+- `[a-z]`: Range. Any char between `a` and `z` (lowercase)
+- `[a-zA-Z]`: Range. Any char between `a` and `z` or between `A` and `Z`
+- `[a-zA-Z0-9]`: Range. Any char between `a` and `z` or between `A` and `Z` or between `0` and `9`
+- `a|b`: `a` or `b`
+- `\`: Escape char
+- `\.`: A dot
+- `\n`: New line
