@@ -10,7 +10,7 @@ class Vector:
         self.y = y
     
     def __repr__(self) -> str:
-        return f'Vector({self.x}, {self.y})'
+        return f'{self.__class__.__name__}({self.x}, {self.y})'
 
     def __eq__(self, other: Self) -> bool:
         if not isinstance(other, Vector):
@@ -20,20 +20,20 @@ class Vector:
     # def __ne__(self, other: Self) -> bool:
     #     return not(self.__eq__(other))
 
-    def __neg__(self) -> 'Vector':
-        return Vector(-self.x, -self.y)
+    def __neg__(self) -> Self:
+        return self.__class__(-self.x, -self.y)
 
-    def __add__(self, other: Self) -> 'Vector':
+    def __add__(self, other: Self) -> Self:
         if not isinstance(other, Vector):
             return NotImplemented
-        return Vector(self.x + other.x, self.y + other.y)
+        return self.__class__(self.x + other.x, self.y + other.y)
     
     # def __sub__(self, other: Self) -> 'Vector':
     #     if not isinstance(other, Vector):
     #         return NotImplemented
     #     return Vector(self.x - other.x, self.y - other.y)
     
-    def __sub__(self, other: Self) -> 'Vector':
+    def __sub__(self, other: Self) -> Self:
         # return self.__add__(self.__neg__(other))
         return self + (-other)
     
@@ -43,12 +43,12 @@ class Vector:
         # return sqrt(self.x**2+self.y**2)
         return (self.x**2+self.y**2)**(1/2)
 
-    def __mul__(self, other: int|float) -> 'Vector':
+    def __mul__(self, other: int|float) -> Self:
         if isinstance(other, int) or isinstance(other, float):
-            return Vector(self.x * other, self.y * other)
+            return self.__class__(self.x * other, self.y * other)
         return NotImplemented
     
-    def __rmul__(self, other: int|float) -> 'Vector':
+    def __rmul__(self, other: int|float) -> Self:
         return self.__mul__(other)    
 
 v1 = Vector(2, 3)
@@ -67,3 +67,15 @@ print(v1 * 3)
 print(3 * v1)
 print(v2 * 5.5)
 print(5.5 * v2)
+
+
+class MuokattuVector(Vector):
+    pass
+
+m1 = MuokattuVector(5,6)
+m2 = MuokattuVector(3,4)
+print(m1+m2)
+print(isinstance(m1, Vector))
+print(isinstance(m2, Vector))
+print(m1+v1)
+print(v1+m1)
