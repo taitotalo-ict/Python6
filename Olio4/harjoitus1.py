@@ -1,7 +1,7 @@
 class Point:
     def __init__(self, param1, param2=None) -> None:
         if param2 is None and isinstance(param1, tuple) and len(param1) == 2:
-            self.__init__(param1[0], param1[1])
+            self.__init__(*param1)
         elif isinstance(param1, int) and isinstance(param2, int):
             self._init_with_integers(param1, param2)
         else:
@@ -19,6 +19,22 @@ class Point:
 
     # def __init__(self, *args):
     #     print(args)
+
+
+# Vaihtoehtoinen versio '*args' -parametrilla
+class Point:
+    def __init__(self, *args) -> None:
+        if len(args) == 1 and isinstance(args[0], tuple) and len(args[0]) == 2:
+            self.__init__(*args[0])
+        elif len(args) == 2 and isinstance(args[0], int) and isinstance(args[1], int):
+            self.x = args[0]
+            self.y = args[1]
+        else:
+            raise TypeError('Wrong types for Point')
+
+    def _init_with_integers(self, x, y):
+        self.x = x
+        self.y = y
 
 p1 = Point(4, 5)
 print(p1.x) # 4
