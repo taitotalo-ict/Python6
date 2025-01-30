@@ -8,8 +8,11 @@ class ShipPart:
 
     @property
     def is_destroyed(self) -> bool:
+        '''Returns True if ship part has been hit/destroyed. False otherwise.'''
         return self._is_destroyed
 
+    def __repr__(self) -> str:
+        return f'<ShipPart of {self.ship} (intact: {not self._is_destroyed})>'
 
 class Ship:
     def __init__(self, size: int) -> None:
@@ -31,3 +34,12 @@ class Ship:
         if index >= self.size:
             raise IndexError('ShipPart index out of range.')
         return self.parts[index]
+
+    def __repr__(self) -> str:
+        return f'Ship({self.size})'
+    
+    def __len__(self) -> int:
+        return self.size
+    
+    def __contains__(self, part: ShipPart) -> bool:
+        return part in self.parts
