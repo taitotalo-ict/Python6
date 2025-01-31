@@ -3,8 +3,9 @@ class ShipPart:
         self.ship = ship
         self._is_destroyed = False
 
-    def hit(self) -> None:
+    def hit(self) -> 'Ship':
         self._is_destroyed = True
+        return self.ship
 
     @property
     def is_hit(self) -> bool:
