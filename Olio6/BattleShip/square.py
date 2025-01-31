@@ -30,6 +30,19 @@ class Square:
             raise Exception('Square is not empty.')
         self.content = ship_part
 
+    def hit_str(self) -> str:
+        '''
+        Returns a character representing the content of this square depending on has it been hit:
+           - '·': Sea or ship part that has not been hit.
+           - 'o': Sea that has been hit.
+           - 'X': Ship part that has been hit.
+        '''
+        if isinstance(self.content, Sea):
+            return 'o' if self.content.is_hit() else '·'
+        else:
+            return 'X' if self.content.is_hit() else '·'
+
+
     def __str__(self) -> str:
         '''
         Returns a character representing the content of this square:

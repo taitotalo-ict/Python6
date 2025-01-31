@@ -50,3 +50,21 @@ class Map:
         coordinates = self._get_coordinates_from_map_coordinates(map_coordinates)
 
         return self.squares[coordinates].is_hit
+    
+    def print_map(self):
+        '''Print the map.'''
+        print(f'   {LETTERS[:self.width]}')
+        for y in range(self.height):
+            print(f'{y+1:>2}', end=' ')
+            for x in range(self.width):
+                print(self.squares[Coordinates(x, y)], end='')
+            print()
+
+    def print_hit_map(self):
+        '''Print map with hitting places'''
+        print(f'   {LETTERS[:self.width]}')
+        for y in range(self.height):
+            print(f'{y+1:>2}', end=' ')
+            for x in range(self.width):
+                print(self.squares[Coordinates(x, y)].hit_str(), end='')
+            print()
