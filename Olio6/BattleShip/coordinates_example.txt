@@ -1,0 +1,16 @@
+Direction.UP
+Direction.RIGHT
+Direction.DOWN
+Direction.LEFT
+
+coord = Coordinates(3, 4)
+
+coord.x # 3
+coord.y # 4
+
+coord.get_neighbor(Direction.UP)    # Coordinates(3, 3)
+coord.get_relative(Direction.UP, 2) # Coordinates(3, 2)
+
+coord.get_neighbors()   # [Coordinates(3, 2), Coordinates(4, 2), Coordinates(4, 3), Coordinates(4, 4), Coordinates(3, 4), Coordinates(2, 4), Coordinates(2, 3), Coordinates(2, 2) ]
+
+print(coord)    # (3, 4)
