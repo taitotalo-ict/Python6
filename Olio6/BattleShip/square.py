@@ -21,6 +21,7 @@ class Square:
     def hit(self) -> 'None|Ship':
         return self.content.hit()
     
+    @property
     def is_hit(self) -> bool:
         return self.content.is_hit
     
