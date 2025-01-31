@@ -7,7 +7,7 @@ class ShipPart:
         self._is_destroyed = True
 
     @property
-    def is_destroyed(self) -> bool:
+    def is_hit(self) -> bool:
         '''Returns True if ship part has been hit/destroyed. False otherwise.'''
         return self._is_destroyed
 
@@ -28,7 +28,7 @@ class Ship:
         #     if not part.is_destroyed:
         #         return False
         # return True
-        return all(part.is_destroyed for part in self.parts)
+        return all(part.is_hit for part in self.parts)
     
     def __getitem__(self, index: int) -> ShipPart:
         if index >= self.size:
