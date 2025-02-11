@@ -13,6 +13,11 @@ cursor = conn.cursor()
 nimi = input('Etunimi? ')
 
 # cursor.execute(f"SELECT * FROM users WHERE etunimi='{nimi}'") # SQL inyection!!!
-cursor.execute("SELECT * FROM users WHERE etunimi=?", (nimi,))
+# cursor.execute("SELECT * FROM users WHERE etunimi=?", (nimi,))
+parametrit = {
+    'name': nimi,
+}
+cursor.execute("SELECT * FROM users WHERE etunimi=:name", parametrit)
+
 for row in cursor:
     print(row)
