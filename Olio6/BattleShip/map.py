@@ -1,6 +1,8 @@
 from string import ascii_uppercase as LETTERS
 from coordinates import Coordinates
 from square import Square
+from direction import Direction
+import random
 
 class Map:
     '''
@@ -68,3 +70,67 @@ class Map:
             for x in range(self.width):
                 print(self.squares[Coordinates(x, y)].hit_str(), end='')
             print()
+    
+    def add_ship_random(self, ship: 'Ship') -> None:
+        '''Adds the ship given as parameter in a random position of the map.'''
+        while True:
+            location = self._get_random()
+            direction = Direction.get_random()
+            if self._add_ship(ship, location, direction):
+                break
+
+    def _get_random(self) -> 'Coordinates':
+        return random.choice(self.squares.keys())
+
+    def _add_ship(self, ship: 'Ship', initial_location: 'Coordinates', facing: 'Direction') -> bool:
+        '''Add a ship to the given location and with the given direction. Returns True if the addition has been possible or False otherwise.'''
+        # Get the locations of the ship if they are valid
+        if not (ship_locations := self._get_locations_if_valid(initial_location, facing, len(ship))):
+            return False
+
+        # Get squares on those locations. 
+        squares = [self._get_square(location) for location in ship_locations]
+
+        # Assign ShipPart on those squares        
+        for n in range(len(ship)):
+            squares[n].set_ship_part(ship[n])
+
+        # Add ship's info to the list of ships
+        self.ships[ship] = {
+            'ship': ship,
+            'location': initial_location,
+            'facing': facing,
+            'squares': squares
+        }
+
+        return True
+
+    def _get_locations_if_valid(self, initial_location: 'Coordinates', facing: 'Direction', length: int) -> None|list[Coordinates]:
+        '''Returns a list of locations for a ship in the given direction, with the given length and from the given initial location.
+        
+        Returns None if it is not possible to place the ship inside the map or with enough separation from other ships.
+        '''
+        # Get list of locations (coordinates) given the initial location, where the ship is facing and the length of the ship
+        ship_locations = [initial_location.get_relative(facing, n) for n in range(length)]
+        
+        # Are all locations within the map?
+        for loc in ship_locations:
+            if loc not in self.squares.keys():
+                return None
+        # if not all(map(self.__contains__, ship_locations)):
+        #     return None
+               
+        # Get ship's neighbors' locations
+        neighbor_locations = set()
+        for location in ship_locations:
+            neighbor_locations.update(self._get_neighbor_locations(location))
+
+        # All locations: ship locations + neighbor locations
+        locations = neighbor_locations.union(set(ship_locations))
+
+        # Are all squares in those locations empty?
+        if not all(map(Square.is_empty, {self._get_square(location) for location in locations})):
+            return None
+        
+        # All locations are empty, so the initial location with the given conditions is valid
+        return ship_locations
