@@ -13,6 +13,8 @@ class Coordinates:
         # self._y = y
         self.coordinates = (x, y)
 
+    def __eq__(self, other) -> bool:
+        return (self.x == other.x and self.y == other.y)
 
     @property
     def x(self) -> int:

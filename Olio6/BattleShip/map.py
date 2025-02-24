@@ -74,13 +74,14 @@ class Map:
     def add_ship_random(self, ship: 'Ship') -> None:
         '''Adds the ship given as parameter in a random position of the map.'''
         while True:
+            print(ship)
             location = self._get_random()
             direction = Direction.get_random()
             if self._add_ship(ship, location, direction):
                 break
 
     def _get_random(self) -> 'Coordinates':
-        return random.choice(self.squares.keys())
+        return random.choice(list(self.squares.keys()))
 
     def _add_ship(self, ship: 'Ship', initial_location: 'Coordinates', facing: 'Direction') -> bool:
         '''Add a ship to the given location and with the given direction. Returns True if the addition has been possible or False otherwise.'''
@@ -89,7 +90,7 @@ class Map:
             return False
 
         # Get squares on those locations. 
-        squares = [self._get_square(location) for location in ship_locations]
+        squares = [self.squares[location] for location in ship_locations]
 
         # Assign ShipPart on those squares        
         for n in range(len(ship)):
@@ -114,12 +115,12 @@ class Map:
         ship_locations = [initial_location.get_relative(facing, n) for n in range(length)]
         
         # Are all locations within the map?
-        for loc in ship_locations:
-            if loc not in self.squares.keys():
-                return None
-        # if not all(map(self.__contains__, ship_locations)):
-        #     return None
-               
+        # for loc in ship_locations:
+        #     if not(loc in self.squares.keys()):
+        #         return None
+        if not all(map(self.__contains__, ship_locations)):
+            return None
+        
         # Get ship's neighbors' locations
         neighbor_locations = set()
         for location in ship_locations:
