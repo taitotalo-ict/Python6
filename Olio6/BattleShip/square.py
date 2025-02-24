@@ -59,3 +59,7 @@ class Square:
     def __repr__(self) -> str:
         '''Representation of the square.'''
         return f'Square[{self.content.__class__.__name__}]'
+    
+    def is_empty(self) -> bool:
+        '''Returns True is this square contains a part of the sea. False if there is a ship part in this space.'''
+        return isinstance(self.content, Sea)
