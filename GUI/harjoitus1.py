@@ -13,7 +13,8 @@ class MainWindow(QMainWindow):
         self.show()
         self.counter = 0
 
-        self.setWindowTitle('A')
+        # self.setWindowTitle('A')
+        self.change_title()
         button = QPushButton('Click me!')
         button.clicked.connect(self.change_title)
         button.clicked.connect(self.print_click)
