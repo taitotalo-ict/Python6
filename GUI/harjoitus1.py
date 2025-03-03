@@ -11,6 +11,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.show()
+        self.counter = 0
 
         self.setWindowTitle('A')
         button = QPushButton('Click me!')
@@ -18,6 +19,8 @@ class MainWindow(QMainWindow):
         button.clicked.connect(self.print_click)
 
         self.setCentralWidget(button)
+        self.button = button
+        self.windowTitleChanged.connect(self.print_window_title)
 
     def change_title(self):
         titles = ['A', 'B', 'C', 'D']
@@ -27,7 +30,13 @@ class MainWindow(QMainWindow):
     
     def print_click(self):
         print('Button has been clicked')
+        self.counter += 1
+        if self.counter == 10:
+            self.button.setDisabled(True)
+            # self.button.setEnabled(False)
 
+    def print_window_title(self, new_title):
+        print(f'New window title is: {new_title}')
 
 app = QApplication()    # Aina pitää luoda QApplication, mutta VAIN YKSI!!!!
 
