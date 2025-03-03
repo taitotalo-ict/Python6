@@ -38,9 +38,9 @@ class Square:
            - 'X': Ship part that has been hit.
         '''
         if isinstance(self.content, Sea):
-            return 'o' if self.content.is_hit() else '·'
+            return 'o' if self.content.is_hit else '·'
         else:
-            return 'X' if self.content.is_hit() else '·'
+            return 'X' if self.content.is_hit else '·'
 
 
     def __str__(self) -> str:

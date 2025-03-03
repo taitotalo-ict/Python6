@@ -20,7 +20,7 @@ class Map:
         self.squares = {Coordinates(x, y): Square() for x in range(width) for y in range(height)}
         self.width = width
         self.height = height
-        self.ships = []
+        self.ships = {}
 
     def __contains__(self, coordinates: 'Coordinates') -> bool:
         '''Returns True if the map contains the given coordinates. False otherwise.'''
