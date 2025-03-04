@@ -1,4 +1,5 @@
 # from PySide6 import QtWidgets
+from PySide6.QtCore import QDir
 from PySide6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -10,6 +11,9 @@ from PySide6.QtWidgets import (
     QDialog,
     QDialogButtonBox,
     QMessageBox,
+    QInputDialog,
+    QLineEdit,
+    QFileDialog,
 )
 
 ### Button types:
@@ -74,6 +78,16 @@ class MainWindow(QMainWindow):
         button3.clicked.connect(self.question_message)
         layout.addWidget(button3)
 
+        # InputDialog - Teksti
+        button4 = QPushButton('Show a text-question dialog')
+        button4.clicked.connect(self.text_question)
+        layout.addWidget(button4)
+
+        # FileDialog - Open
+        button5 = QPushButton('Select file to open')
+        button5.clicked.connect(self.open_file)
+        layout.addWidget(button5)
+
         container = QWidget()
         container.setLayout(layout)
         self.setCentralWidget(container)
@@ -103,6 +117,26 @@ class MainWindow(QMainWindow):
             'Is Python the best programming language?'
             )
         print(result)
+
+    def text_question(self):
+        value, result = QInputDialog.getText(
+            self, # Parent
+            'Username', # Title
+            'Please, confirm the username', # Label
+            QLineEdit.Normal,   # EchoMode
+            QDir.home().dirName()   # (default)Text
+        )
+        print(f'{value=} - {result=}')
+
+    def open_file(self):
+        filename, selected_filter = QFileDialog.getOpenFileName(
+            self,
+            'Select File to open',
+            filter='All files (*);;Python files (*.py)'
+        )
+        print(f'{filename=} - {selected_filter=}')
+
+
 
 app = QApplication()    # Aina pitää luoda QApplication, mutta VAIN YKSI!!!!
 window = MainWindow()      # Qt toimii ns. "widgetteillä". Jos widgettillä ei ole "vanhempia", se näyttää ikkunalta
