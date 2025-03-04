@@ -47,6 +47,8 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(layout)
         self.setCentralWidget(container)
+        # self.setGeometry(2050,50, 500,500)
+        # self.setMinimumSize(300,500)
 
     def update_label(self, color):
         self.label.setText(color)
