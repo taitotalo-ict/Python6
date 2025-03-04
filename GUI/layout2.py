@@ -16,7 +16,6 @@ class Color(QWidget):
 
         self.setAutoFillBackground(True)
         
-
         palette = self.palette()
         palette.setColor(self.backgroundRole(), color)
         # palette.setColor(QPalette.Window, QColor(color))
@@ -29,8 +28,25 @@ class MainWindow(QMainWindow):
     
     def setupUI(self):
         self.show()
-        widget = Color('green')
-        self.setCentralWidget(widget)
+
+        layout1 = QHBoxLayout()
+        layout2 = QVBoxLayout()
+        layout3 = QVBoxLayout()
+
+        layout2.addWidget(Color('red'))
+        layout2.addWidget(Color('green'))
+        layout2.addWidget(Color('blue'))
+
+        layout3.addWidget(Color('purple'))
+        layout3.addWidget(Color('black'))
+        
+        layout1.addLayout(layout2)
+        layout1.addWidget(Color('pink'))
+        layout1.addLayout(layout3)
+
+        container = QWidget()
+        container.setLayout(layout1)
+        self.setCentralWidget(container)
 
 app = QApplication()
 window = MainWindow()
