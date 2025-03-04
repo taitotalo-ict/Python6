@@ -9,6 +9,7 @@ from PySide6.QtWidgets import (
     QWidget,
     QDialog,
     QDialogButtonBox,
+    QMessageBox,
 )
 
 ### Button types:
@@ -63,6 +64,11 @@ class MainWindow(QMainWindow):
         layout.addWidget(label)
         layout.addWidget(button)
 
+        # Message Dialog
+        button2 = QPushButton('Show message')
+        button2.clicked.connect(self.show_message)
+        layout.addWidget(button2)
+
         container = QWidget()
         container.setLayout(layout)
         self.setCentralWidget(container)
@@ -71,6 +77,20 @@ class MainWindow(QMainWindow):
         dlg = CustomDialog()
         result = dlg.exec()
         print(result)
+    
+    def show_message(self):
+        dlg = QMessageBox(text='Action has been canceled!')
+        # dlg.setText('Action has been canceled!')
+        dlg.setText("The document has been modified.")
+        dlg.setInformativeText("Do you want to save your changes?")
+        dlg.setStandardButtons(QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
+        dlg.setDefaultButton(QMessageBox.Save)
+        result = dlg.exec()
+        match result:
+            case QMessageBox.Save: print('Save')
+            case QMessageBox.Discard: print('Discard')
+            case QMessageBox.Cancel: print('Cancel')
+            
 
 app = QApplication()    # Aina pitää luoda QApplication, mutta VAIN YKSI!!!!
 window = MainWindow()      # Qt toimii ns. "widgetteillä". Jos widgettillä ei ole "vanhempia", se näyttää ikkunalta
