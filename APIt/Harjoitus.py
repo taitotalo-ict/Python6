@@ -1,5 +1,4 @@
 from pathlib import Path
-import pprint
 import sys
 from dotenv import dotenv_values
 import requests
@@ -20,13 +19,12 @@ if not res.ok:
     print(res.reason)
     sys.exit(1)
 
-# pprint.pprint(res.json())
 for resource in res.json():
     if resource['media_type'] != 'image':
         continue
 
     # Hoidetaan kuvan kansio
-    year, month, day = resource['date'].split('-')
+    year, month, _ = resource['date'].split('-')
     image_folder = Path(BASEDIR / 'images' / year / month)
     if not image_folder.exists():
         image_folder.mkdir(parents=True)
