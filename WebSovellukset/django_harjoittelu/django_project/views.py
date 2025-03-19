@@ -1,12 +1,19 @@
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import render
 
 
 def index(request):
-    return HttpResponse('Hello world!')
+    return render(request, 'index.html', context={'title': 'Homepage'})
+    # return HttpResponse('Hello world!')
 
 def hello(request, name):
-    return HttpResponse(f'Hello {name}')
+    context = {
+        'title': 'Hello',
+        'name': name,
+    }
+    return render(request, 'index.html', context=context)
+    # return HttpResponse(f'Hello {name}')
 
 def search(request):
     print(request.GET)
