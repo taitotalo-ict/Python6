@@ -1,4 +1,11 @@
-from flask import Flask, url_for, request
+from flask import (
+    Flask, 
+    url_for, 
+    request, 
+    jsonify, 
+    make_response,
+    render_template
+)
 
 app = Flask(__name__)
 
@@ -72,6 +79,32 @@ def login():
             return 'Login accepted'
         else:
             return 'Login failed'
+
+@app.route('/json')
+def json_funktio():
+    return jsonify({'nimi': 'christian', 'age': 50})
+
+@app.route('/custom')
+def custom():
+    # return make_response(iter(range(100000)))
+    return make_response({'Error': 'Resource not found'}, 404)
+
+@app.route('/')
+def index():
+    user = {'username': 'christian'}
+    return render_template('index.html', username=user['username'], title='kotisivu')
+#     return f'''
+# <!DOCTYPE html>
+# <html lang="en">
+# <head>
+#     <title>Homepage</title>
+# </head>
+# <body>
+#     <h1>Homepage</h1>
+#     <p>Welcome back {user['username']}!</p>
+# </body>
+# </html>
+# '''
 
 
 if __name__ == '__main__':    
