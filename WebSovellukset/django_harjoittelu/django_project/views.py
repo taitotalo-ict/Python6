@@ -1,4 +1,6 @@
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.urls import reverse
+
 
 def index(request):
     return HttpResponse('Hello world!')
@@ -20,4 +22,5 @@ def json_view(request):
     return JsonResponse(data, safe=False)
 
 def redirect(request):
-    return HttpResponseRedirect('/hello/christian')
+    return HttpResponseRedirect(reverse('hello', args=['christian']))
+    # return HttpResponseRedirect(reverse('hello', kwargs={'name':'christian'}))
