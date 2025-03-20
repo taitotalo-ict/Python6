@@ -16,15 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
-from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='homepage'),
-    path('hello/<str:name>/', views.hello, name='hello'),
-    path('search/', views.search),
-    path('json/', views.json_view),
-    path('redirect/', views.redirect)
+    path('tests/', include('testi.urls', namespace='tests'))
     # path('products/', include('products.urls')) # projekti/products/urls.py
 ]
 

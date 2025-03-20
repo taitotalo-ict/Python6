@@ -29,5 +29,6 @@ def json_view(request):
     return JsonResponse(data, safe=False)
 
 def redirect(request):
-    return HttpResponseRedirect(reverse('hello', args=['christian']))
+    return HttpResponseRedirect(reverse('tests:hello', args=['christian']))
     # return HttpResponseRedirect(reverse('hello', kwargs={'name':'christian'}))
+
