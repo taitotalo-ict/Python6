@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
+from testi.views import etusivu
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tests/', include('testi.urls', namespace='tests'))
+    path('tests/', include('testi.urls', namespace='tests')),
+    path('', etusivu),
     # path('products/', include('products.urls')) # projekti/products/urls.py
 ]
 
