@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <p>You have send the following data in POST:</p>
+    <ul>
+    {% for key, value in data.items %}
+        <li>{{ key }}: {{ value }}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

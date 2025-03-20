@@ -61,8 +61,7 @@ def contact_view(request):
             context['name'] = form.cleaned_data['name']
             context['email'] = form.cleaned_data['email']
             context['message'] = form.cleaned_data['message']
-            return HttpResponse(context)
-            return render(request, 'testi/thanks.html', context)
+            return render(request, 'testi/thanks.html', context={'data': context})
 
     return render(request, 'testi/contact.html', {'form': form})
 
