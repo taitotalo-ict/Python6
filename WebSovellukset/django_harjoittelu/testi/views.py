@@ -4,7 +4,8 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, 'index.html', context={'title': 'Homepage'})
+    context = {'title': 'Homepage'}
+    return render(request, 'testi/index.html', context=context)
     # return HttpResponse('Hello world!')
 
 def hello(request, name):
@@ -12,7 +13,7 @@ def hello(request, name):
         'title': 'Hello',
         'name': name,
     }
-    return render(request, 'index.html', context=context)
+    return render(request, 'testi/index.html', context=context)
     # return HttpResponse(f'Hello {name}')
 
 def search(request):
