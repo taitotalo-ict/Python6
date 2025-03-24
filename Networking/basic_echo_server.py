@@ -9,6 +9,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     conn, addr = s.accept()
     print(f'Incomming connection from {addr}')
     with conn:
-        data = conn.recv(1024)
-        print(data)
-        conn.sendall(data)
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                break
+            print(data)
+            conn.sendall(data)

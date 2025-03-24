@@ -5,6 +5,13 @@ port = 50000
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((host, port))
-    s.send(b'Moi')
-    data = s.recv(1024)
-    print(data)
+
+    while True:
+        text = input('Text to send: ')
+        if text == 'exit':
+            break
+        s.send(text.encode())
+        data = s.recv(1024)
+        if not data:
+            break
+        print(data)
