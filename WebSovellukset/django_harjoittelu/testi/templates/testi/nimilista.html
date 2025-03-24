@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nimilista</title>
+</head>
+<body>
+    <h1>Nimilista</h1>
+    <p>Nimet tietokannassa:</p>
+    <ul>
+        {% for name in names %}
+            <li>{{ name.nimi }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'testi:nimilista' %}">nimilista</a>
+</body>
+</html>
