@@ -1,7 +1,7 @@
 from threading import Thread
 import socket
 
-host = '127.0.0.1'
+host = '172.20.21.200'
 port = 4000
 
 
