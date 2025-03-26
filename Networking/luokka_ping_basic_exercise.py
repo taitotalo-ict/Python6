@@ -1,6 +1,9 @@
 # TITE luokka ping
 from threading import Thread
 import subprocess
+import time
+
+# time.sleep(s)
 
 
 def get_hosts_for_classroom(classroom:str) -> list:
@@ -47,13 +50,18 @@ def ping(ip:str) -> bool:
 
 def ping_host(hostname:str, ip:str) -> None:
     '''Ping a host and stores the response in the hosts_responses dictionary with the hostname as the key.'''
-    responses[hostname] = ping(ip)
-    
+    while not shutdown:
+        responses[hostname] = ping(ip)
+        time.sleep(1)
 
 def print_responses() -> None:
     '''Prints the responses of the hosts in the hosts_responses dictionary in the format 'hostname: response'.'''
-    for hostname, response in responses.items():
-        print(f'{hostname}: {response}')
+    while not shutdown:
+        for hostname, response in responses.items():
+            print(f'{hostname}: {response}')
+        print()
+        time.sleep(1)
+
 
 if __name__ == '__main__':
     # Get hosts to ping
@@ -62,6 +70,8 @@ if __name__ == '__main__':
     # Initialize hosts_responses dictionary: {hostname: response, ...}
     responses = {hostname: False for hostname, _ in hosts}
     
+    shutdown = False
+
     # Launch ping threads
     threads = []
     for hostname, ip in hosts:
@@ -69,10 +79,19 @@ if __name__ == '__main__':
         thread.start()
         threads.append(thread)
     
+    thread = Thread(target=print_responses)
+    threads.append(thread)
+    thread.start()
+
+    while input('Write exit to end: ') != 'exit':
+        pass
+
+    shutdown = True
+
     # Wait for all pings to end
     for thread in threads:
         thread.join()
 
     # Print responses
-    print_responses()
+    #print_responses()
     
