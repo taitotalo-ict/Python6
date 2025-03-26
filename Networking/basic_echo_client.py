@@ -8,6 +8,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
     while True:
         text = input('Text to send: ')
+        
         if text == 'exit':
             break
         s.send(text.encode())

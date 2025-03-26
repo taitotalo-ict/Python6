@@ -39,8 +39,9 @@ def listener():
 
 Thread(target=listener).start()
 while True:
+    print('Write shutdown to exit')
     text = input('')
-    if text == 'exit':
+    if text == 'shutdown':
         shutdown = True
         break
 
