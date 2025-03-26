@@ -1,5 +1,7 @@
 # TITE luokka ping
 from threading import Thread
+import subprocess
+
 
 def get_hosts_for_classroom(classroom:str) -> list:
     '''
@@ -27,7 +29,21 @@ def ping(ip:str) -> bool:
 
     The host is pinged up to three times. The function returns True if the host responds at least once, False otherwise.
     '''
-    pass
+    cmd = f'ping -n 1 -w 300 {ip}'
+    
+    # Vaihtoehto 1:
+    # exit_status = os.system(cmd:str)
+
+    # Vaihtoehto 2:
+    # completedProcess = subprocess.run(cmd.split()) # exit_status = completedProces.returncode
+
+    # Vaihtoehto 3:
+    # exit_status = subprocess.call(cmd.split())
+
+    for _ in range(3):
+        if subprocess.call(cmd.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0:
+            return True
+    return False
 
 def ping_host(hostname:str, ip:str) -> None:
     '''Ping a host and stores the response in the hosts_responses dictionary with the hostname as the key.'''
@@ -36,8 +52,8 @@ def ping_host(hostname:str, ip:str) -> None:
 
 def print_responses() -> None:
     '''Prints the responses of the hosts in the hosts_responses dictionary in the format 'hostname: response'.'''
-    pass
-    
+    for hostname, response in responses.items():
+        print(f'{hostname}: {response}')
 
 if __name__ == '__main__':
     # Get hosts to ping
@@ -47,11 +63,16 @@ if __name__ == '__main__':
     responses = {hostname: False for hostname, _ in hosts}
     
     # Launch ping threads
+    threads = []
     for hostname, ip in hosts:
-        Thread(target=ping_host, args=(hostname, ip)).start()
+        thread = Thread(target=ping_host, args=(hostname, ip))
+        thread.start()
+        threads.append(thread)
     
     # Wait for all pings to end
+    for thread in threads:
+        thread.join()
 
     # Print responses
-
-    pass
+    print_responses()
+    
