@@ -9,18 +9,15 @@ if not res.ok:
 
 soup = BeautifulSoup(res.text, 'html.parser')
 
-jobs = soup.find_all(class_='card')
-
 counter = 0
-
-for job in jobs:
-    location = job.find('p', class_='location').text.strip()
+for card in soup.find_all(class_='card'):
+    location = card.find('p', class_='location').text.strip()
     state = location.split(',')[1].strip()
     if state != 'AE':
         continue
     counter += 1
-    title = job.h2.text.strip()
-    link = job.find('a', string='Apply')['href']
+    title = card.h2.text.strip()
+    link = card.find('a', string='Apply')['href']
 
     print(f'Työtarjous {counter}: {title}\nSijainti: {location}\nLinkki: {link}\n')
 
