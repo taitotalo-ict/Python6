@@ -1,0 +1,9 @@
+[project]
+name = "exe-tiedosto"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "cx-freeze>=8.0.0",
+    "nuitka>=2.6.9",
+    "pyinstaller>=6.12.0",
+]
